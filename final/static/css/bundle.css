@@ -1,0 +1,102 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    background-color: #000 !important;
+}
+
+html {
+  background-color: #000 !important;
+}
+
+.project-name{
+    text-align: center;
+    color: #fff;
+}
+
+.intro_black {
+  background-color: #000;
+  color: #969696;
+}
+
+.intro_black h1 {
+  font-weight: 600 !important;
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.intro_white {
+  background-color: #fff;
+  color: #969696;
+}
+
+.intro_white h1 {
+  font-weight: 600 !important;
+  font-size: 2rem;
+  text-align: center;
+  padding: 10rem 6rem;
+}
+
+.title h2 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  text-align: center;
+  padding: 15rem 20rem;
+}
+
+.title {
+  background-image: url("../img/title.png");
+  background-repeat: no-repeat;
+  background-position: 80% 10%;
+  background-attachment: fixed;
+  color: #fff;
+  min-height: 100%
+}
+
+
+.introduction{
+  background-color: #000;
+  color: #f4f4f4;
+}
+
+.step3 p {
+  font-size: 1.2em;
+  line-height: 1.55;
+  padding-bottom: 27rem;
+  padding-top: 1em;
+  text-align: center;
+  text-align: left;
+  display: block;
+}
+
+.step3 {
+  opacity: 1;
+  background-color: pink;
+  display: block;
+  height: 100% !important;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.scroll__text {
+  width: 60%;
+  left: 40%;
+  top: -20.8em;
+  position: relative;
+  text-align: center;
+  z-index: 999;
+}
+
+.scroll__title {
+  font-weight: 400;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 40%;
+  padding-left: 15%;
+  padding-top: 15%;
+  top: 4em;
+  bottom: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 100;
+}

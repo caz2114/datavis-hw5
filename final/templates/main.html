@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<div id="map">
+<h3>Time: <span id="show_time">0:00-1:00</span></h3>
+<input id ="slider" type="range" min="0" max="23" value="0" step = "1" style="width: 400px; margin-right: 10px;"/>
+<button id="minus"><</button>
+<button id="add">></button>
+</div>
+
+
+<div id="airportDivert">
+</div>
+
+<style>
+
+body {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+</style>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="map.js"></script>
+<script src="airportDivert.js"></script>

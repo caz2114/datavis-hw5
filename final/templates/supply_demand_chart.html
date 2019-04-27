@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SD Chart</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script type="text/javascript" src="supply_demand_chart.js"></script>
+	<style>
+	
+	body {
+		background: black;
+	}
+
+	.myYaxis line{
+	     stroke: white;
+	   }
+
+	   .myYaxis path{
+	     stroke: white;
+	   }
+
+   .myYaxis text{
+     fill: white;
+   }
+	.myXaxis line{
+	     stroke: white;
+	   }
+
+	   .myXaxis path{
+	     stroke: white;
+	   }
+
+   .myXaxis text{
+     fill: white;
+   }
+
+   body text {
+   	fill: white;
+   }
+
+   #scale_btn LABEL {
+   	color: white;
+   }
+
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<form id="scale_btn">
+		<input type="radio" name="scale" value="Month" checked="checked">
+		<LABEL>Month</LABEL>
+		<input type="radio" name="scale" value="Quarter">
+		<LABEL>Quarter</LABEL>
+		<input type="radio" name="scale" value="Year">
+		<LABEL>Year</LABEL>
+
+	</form>
+
+</body>
+</html>
