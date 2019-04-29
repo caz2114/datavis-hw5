@@ -246,6 +246,17 @@ legend.append("text")
       case 1: return "International";
     }
   });
+
+  svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 10)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px")
+        .style("font-family", "sans-serif")
+        .style("fill", "white") 
+        .style("text-decoration", "underline")  
+        .text("Net Income in $000");
+
 // Create a function that takes a dataset as input and update the plot:
 function update(data) {
 
@@ -316,8 +327,8 @@ var color = d3.scaleOrdinal()
 update(profit_AA);
 
 
-$('.company_btn').click(function(){
-  var company = $(this).attr('id');
+$('#company_btn').click(function(){
+  var company = $("input[name='company']:checked").val();
   console.log(company);
   if (company == "AA"){
       update(profit_AA);
