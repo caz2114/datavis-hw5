@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var margin = {top: 20, right: 30, bottom: 30, left: 60},
       width = 800 - margin.left - margin.right,
-      height = 600 - margin.top - margin.bottom;
+      height = 550 - margin.top - margin.bottom;
 
     var svg_map = d3.select("#map")
     .append("svg")
@@ -86,7 +86,7 @@ $(document).ready(function(){
 
         var lineColor = function(d) {
           if (parseInt(d[0].cancelled) == 1) {
-            return "red";
+            return "#880000";
           }
           if (parseInt(d[0].diverted) == 1) {
             return "blue";
@@ -150,16 +150,15 @@ $(document).ready(function(){
         var legend_keys = ["normal", "cancelled", "diverted"];
         var colorScale = d3.scaleOrdinal()
           .domain(legend_keys)
-          .range(["grey", "red", "blue"]);
+          .range(["grey", "#880000", "blue"]);
 
         var lineLegend = svg_map.selectAll(".lineLegend")
                             .data(legend_keys)
                             .enter().append("g")
                             .attr("class","lineLegend")
                             .attr("transform", function (d,i) {
-                              return "translate(" +width*0.9 + "," + (i*20)+")";
+                              return "translate(" + (100 + width*0.3*i) + "," + height +")";
                             });
-                            //.style("color", "white");
 
         lineLegend.append("text").text(function (d) {return d;})
           .attr("transform", "translate(20,10)") //align texts with boxes

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 var margin = {top: 20, right: 30, bottom: 30, left: 70},
-    width = 800 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
 
 var svg1 = d3.select("#seats")
   .append("svg")
@@ -16,13 +16,6 @@ var tooltip1 = svg1.append("g")
     .attr("class", "tooltip")
     .style("display", "none");
 
-//   tooltip.append("rect")
-//     .attr("x", -35)
-//     .attr("width", 100)
-//     .attr("height", 20)
-//     .attr("fill", "white")
-//     .style("opacity", 1);
-
   tooltip1.append("text")
     .attr("x", 15)
     .attr("dy", "1.2em")
@@ -33,22 +26,6 @@ var tooltip1 = svg1.append("g")
 
 d3.csv("https://raw.githubusercontent.com/caz2114/datavis-hw5/master/data/annual_seats_new.csv").then
 (  function (data) {
-
-//   function tweenDash() {
-//     var l = this.getTotalLength(),
-//         i = d3.interpolateString("0," + l, l + "," + l);
-//     return function (t) { return i(t); };
-//   };
-
-//   function transition(path) {
-//     d3.selectAll(".multi-lines").each(function(d,i){
-//       d3.select(this).transition()
-//         .attr("stroke-width", "3px")
-//         .delay(i*250)
-//         .duration(2000)
-//         .attrTween("stroke-dasharray", tweenDash);
-//     })
-//   };
 
   var x = d3.scaleLinear()
     //.domain(d3.extent(data, d => d.year))

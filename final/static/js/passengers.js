@@ -1,7 +1,7 @@
 $(document).ready(function(){
 var margin = {top: 20, right: 30, bottom: 30, left: 70},
-    width = 800 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
 
 var svg = d3.select("#passengers")
   .append("svg")
@@ -10,18 +10,11 @@ var svg = d3.select("#passengers")
     .attr("class", "no-hover")
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + margin.left + "," + margin.top + ")")
 
 var tooltip = svg.append("g")
     .attr("class", "tooltip")
     .style("display", "none");
-
-  // tooltip.append("rect")
-  //   .attr("x", -35)
-  //   .attr("width", 100)
-  //   .attr("height", 20)
-  //   .attr("fill", "white")
-  //   .style("opacity", 1);
 
   tooltip.append("text")
     .attr("x", 15)
@@ -33,22 +26,6 @@ var tooltip = svg.append("g")
 
 d3.csv("https://raw.githubusercontent.com/caz2114/datavis-hw5/master/data/annual_passengers_new.csv").then
 (  function (data) {
-
-//   function tweenDash() {
-//     var l = this.getTotalLength(),
-//         i = d3.interpolateString("0," + l, l + "," + l);
-//     return function (t) { return i(t); };
-//   };
-
-//   function transition(path) {
-//     d3.selectAll(".multi-lines").each(function(d,i){
-//       d3.select(this).transition()
-//         .attr("stroke-width", "3px")
-//         .delay(i*250)
-//         .duration(2000)
-//         .attrTween("stroke-dasharray", tweenDash);
-//     })
-//   };
 
   var x = d3.scaleLinear()
     //.domain(d3.extent(data, d => d.year))
@@ -175,7 +152,6 @@ d3.csv("https://raw.githubusercontent.com/caz2114/datavis-hw5/master/data/annual
             .attr("opacity", 1);
           tooltip.style("display", "none");
       });
-      //.call(transition);
 
   var legend_keys = ["WN", "AA", "DL", "UA", "US", "NW"];
 

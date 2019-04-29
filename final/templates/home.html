@@ -12,12 +12,26 @@
     <!-- Font  -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-	<!-- css and js -->
+	<!-- css -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/slider.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/button.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/radio.css') }}">
+
+	<!-- js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/home.js') }}"></script>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
+
+	<!-- visualization -->
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/flights.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/seats.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/airportDivert.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/supply_demand_chart.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/passengers.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/profit_chart.js') }}"></script>
+
 
 	<style>
 		body, html {
@@ -132,29 +146,40 @@
 			background-image: -o-linear-gradient(top, #000, #BEBEBE);
 			background-image: linear-gradient(to bottom, #000, #BEBEBE);
 			color: #e3e3e3;
+			padding-top: 100px;
+			padding-bottom: 100px;
 		}
 
-		#first-map-scroll {
-			-webkit-box-pack: center;
-			-ms-flex-pack: center;
-			justify-content: center;
-			border-top: 1px;
-			border-bottom: 1px;
+		.happen_bg2 {
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#BEBEBE), to(#000));
+			background-image: -webkit-linear-gradient(top, #BEBEBE, #000);
+			background-image: -o-linear-gradient(top, #BEBEBE, #000);
+			background-image: linear-gradient(to bottom, #BEBEBE, #000);
+			color: #e3e3e3;
+			padding-top: 100px;
+			padding-bottom: 100px;
+			height:100%
 		}
 
-		.scroll__text {
-			width: 37%;
-			padding-left: 5%;
-			padding-top: 5%;
-			position: sticky;
+		.closer_bg {
+			background-color: #000;
+			color: #e3e3e3;
+			padding-top: 100px;
+			padding-bottom: 100px;
+		}
+
+		#passenger_seat_intro{
+			background-color: #E2E2E2;
+			color: #000;
+			padding-top: 100px;
+			padding-bottom: 100px;
 		}
 
 		.scroll__figure {
-			width: 63%;
 			position: -webkit-sticky;
 			position: sticky;
 			right: 100%;
-			top: 7em;
+			top: 3em;
 			padding-left: 40em;
 			bottom: auto;
 			-webkit-transform: translate3d(0, 0, 0);
@@ -162,13 +187,11 @@
 			z-index: 100;
 		}
 
-		.scroll__figure.is-fixed {
-			position: fixed;
-		}
-
-		.scroll__figure.is-bottom {
-			bottom: 0;
-			top: auto;
+		.scroll__text {
+			width: 37%;
+			padding-left: 5%;
+			padding-top: 5%;
+			position: sticky;
 		}
 
 		.step {
@@ -181,6 +204,7 @@
 		.step.is-active {
 			opacity: 1;
 		}
+
 
 	</style>
 </head>
@@ -222,36 +246,49 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/911.js') }}"></script>
-	<div id="flights"></div>
-
 	<div class="happen_bg">
-		<div id="first-map-scroll">
-			<div class="scroll__figure">
-				<script type="text/javascript" src="{{ url_for('static', filename = 'js/map.js') }}"></script>
-				<div id="map">
-					<h3>Time: <span id="show_time">0:00-1:00</span></h3>
-					<input id ="slider" type="range" min="0" max="23" value="0" step = "1" style="width: 400px; margin-right: 10px;"/>
-					<button id="minus"><</button>
-					<button id="add">></button>
+		<div class="scroll__figure">
+			<script type="text/javascript" src="{{ url_for('static', filename = 'js/map.js') }}"></script>
+			<div id="map" >
+				<div class="row" >
+					<div class="col-md-12">
+						<h3>Time: <span id="show_time">0:00-1:00</span></h3>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-md-8">
+						<input class="slider" id="slider" type="range" min="0" max="23" value="0" step = "1"/>
+					</div>
+					<div class="col-md-4">
+						<button class="button" id="minus"><</button>
+						<button class="button" id="add">></button>
+					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class='scroll__text'>
+		<div class='scroll__text'>
+			<div class='step'>
+				<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
+				<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
+			</div>
+			<div class='step'>
+				<h3>By the 1960’s we saw an increase of more than 1700% in the number of school districts with a court order.</h3>
+				<p>The 1960’s was the height of the civil rights movement, which was marked by a surge in grassroots activism in all sectors of African-American life including education. In 1968 the Supreme Court ordered every state to desegregate their school systems. In order to comply with the law, under the mandate of Brown, the schools were judged on desegregation using 5 factors: facilities, staff, faculty, extracurricular activities, and transportation. To this day, these factors are still used to evaluate whether a school can legally be considered desegregated.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="happen_bg2 d-flex align-items-center">
+		<div class="row">
+			<div class="col-md-8 d-flex align-items-center justify-content-center">
+				<div id="flights"></div>
+			</div>
+
+			<div class="col-md-4" style="padding-right:100px">
 				<div class='step'>
 					<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
 					<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
-				</div>
-				<div class='step'>
-					<h3>By the 1960’s we saw an increase of more than 1700% in the number of school districts with a court order.</h3>
-					<p>The 1960’s was the height of the civil rights movement, which was marked by a surge in grassroots activism in all sectors of African-American life including education. In 1968 the Supreme Court ordered every state to desegregate their school systems. In order to comply with the law, under the mandate of Brown, the schools were judged on desegregation using 5 factors: facilities, staff, faculty, extracurricular activities, and transportation. To this day, these factors are still used to evaluate whether a school can legally be considered desegregated.</p>
-				</div>
-				<div class='step'>
-					<h3>Flash forward to the present day…</h3>
-					<p>As of 2018 there have been 306 number of total mandates to desegregate made in the 60+ years since the first Brown decision.</p>
-				</div>
-				<div class='step'>
-					<h3>43% are still active, with at least 70% dating back to 1970’s.</h3>
 				</div>
 			</div>
 		</div>
@@ -270,22 +307,34 @@
 		</div>
 	</div>
 
-	<!-- Airport Diversion -->
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/airportDivert.js') }}"></script>
-	<div id="airportDivert">
+	<div class="happen_bg">
+		<!-- Airport Diversion -->
+		<div id="airportDivert"></div>
+
+		<div class='scroll__text'>
+			<div class='step'>
+				<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
+				<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
+			</div>
+			<div class='step'>
+				<h3>By the 1960’s we saw an increase of more than 1700% in the number of school districts with a court order.</h3>
+				<p>The 1960’s was the height of the civil rights movement, which was marked by a surge in grassroots activism in all sectors of African-American life including education. In 1968 the Supreme Court ordered every state to desegregate their school systems. In order to comply with the law, under the mandate of Brown, the schools were judged on desegregation using 5 factors: facilities, staff, faculty, extracurricular activities, and transportation. To this day, these factors are still used to evaluate whether a school can legally be considered desegregated.</p>
+			</div>
+		</div>
 	</div>
 
-	<!-- Supply and demand chart -->
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/supply_demand_chart.js') }}"></script>
-	<div id="sd_chart">
-		<form id="scale_btn">
-			<input type="radio" name="scale" value="Month" checked="checked">
-			<LABEL>Month</LABEL>
-			<input type="radio" name="scale" value="Quarter">
-			<LABEL>Quarter</LABEL>
-			<input type="radio" name="scale" value="Year">
-			<LABEL>Year</LABEL>
-		</form>
+	<div class="happen_bg2">
+		<!-- Supply and demand chart -->
+		<div id="sd_chart">
+			<form id="scale_btn">
+				<input type="radio" name="scale" value="Month" checked="checked">
+				<LABEL>Month</LABEL>
+				<input type="radio" name="scale" value="Quarter">
+				<LABEL>Quarter</LABEL>
+				<input type="radio" name="scale" value="Year">
+				<LABEL>Year</LABEL>
+			</form>
+		</div>
 	</div>
 
 	<div class="closer_title" id="section3_start">
@@ -294,20 +343,79 @@
 		</div>
 	</div>
 
-	<!-- Closer look passengers -->
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/passengers.js') }}"></script>
-	<div id="passengers"></div>
+	<div class="row d-flex align-items-center justify-content-center" id="passenger_seat_intro">
+			<div class="col-md-8" style="text-align: center;">
+				<span style="font-size:30px;">To take a closer look,</span> we are
+				interested in airline companies directly involved in the 911 attack,
+				which means their planes were hijacked. We wonder if they were affected
+				differently compared to other airline companies. Two UA (United Airlines)
+				planes and two AA(American Airlines) planes got hijacked in
+				the 911 attack. Therefore, we chose 6 largest airline companies
+				in 2001 including UA and AA and analyzed two variables: the number
+				of passengers and the number of seats. The number of passengers
+				represents the actual number of boarding passengers and the number
+				of seats represents the number of available seats provided by the airline.
+				In other words, the number of passengers represents demand and the number of
+				seats represents supply.
+				<br /><br />We found something interesting.
+			</div>
+	</div>
+	<div class="closer_bg">
+		<div class="row">
+			<!-- <div class="col-md-6 d-flex align-items-center justify-content-center" > -->
+			<div class="col-md-6 d-flex align-items-center flex-column" >
+				<div class="row d-flex align-items-center justify-content-center">
+					<div id="passengers"></div>
+				</div>
 
-	<!-- Closer look seats -->
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/seats.js') }}"></script>
-	<div id="seats"></div>
+				<div class="row d-flex align-items-center justify-content-center">
+					<div id="seats"></div>
+				</div>
+			</div>
+			<div class="col-md-6" >
+				<div class="row">
+					<div class='step' >
+						<!-- TODO: select only AA -->
+						<h3>Growth in AA's supply and demand not expected.</h3>
+						<p>After 911 attack,all airline companies had their number of
+							passengers and seats decreased to varying degrees except AA.
+							Actually AA made a great jump in the number of both passengers
+							and seats, which seems strange considering that AA was
+							directly involved in 911. We later took a look at AA's
+							revenue report around 2001 and found the possible reason.</p>
+					</div>
+
+					<div class='step' >
+						<h3>US Airways disproportionately affected</h3>
+						<p>US Airways experienced a severe and long-lasting decrease
+							in number of both passengers and seats. after 911 attack.
+							As the largest carrier at Washington National Airport, US
+							Airways was disproportionately affected by that airport's
+							extended closure following the September 11 terrorist
+							attacks. The resulting financial disaster precipitated
+							the closure of the airline's MetroJet network, which
+							led to the de-hubbing of the subsidiary's primary operating
+							base at Baltimore-Washington International Airport and
+							the furloughing of thousands of employees.</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Closer look profits -->
-	<script type="text/javascript" src="{{ url_for('static', filename = 'js/profit_chart.js') }}"></script>
-	<div id="profit_chart">
-		<button class="company_btn" name="company" id="AA">AA</button>
-		<button class="company_btn" name="company" id="UA">UA</button>
+	<div class="happen_bg2">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="profit_chart">
+					<button class="company_btn" name="company" id="AA">AA</button>
+					<button class="company_btn" name="company" id="UA">UA</button>
+				</div>
+			</div>
+		</div>
 	</div>
+
 
 	<div class="footer">
 		<div class="row d-flex justify-content-end h-100">
