@@ -35,7 +35,7 @@ $(document).ready(function(){
   ];
 var margin = {top: 20, right: 30, bottom: 30, left: 30},
     width = 800 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 
 
@@ -89,9 +89,6 @@ var svg2 = d3.select("#flights")
   svg2.append("g")
   .attr("class", "x_axis")
       .call(xAxis);
-
-  // svg2.append("g")
-  //     .call(yAxis);
 
   svg2.append("line")
     .attr("stroke", "red")

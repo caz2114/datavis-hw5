@@ -46,8 +46,8 @@ let draw_SP_chart = function(link, scale){
 
    	$(".SP_chart").remove();
     var margin = {top: 20, right: 30, bottom: 30, left: 60},
-    	width = 1000 - margin.left - margin.right;
-    	height = 500 - margin.top - margin.bottom;
+    	width = 700 - margin.left - margin.right;
+    	height = 400 - margin.top - margin.bottom;
 
 	// Chart Initialization
 	var svg = d3.select("#sd_chart").append("svg")

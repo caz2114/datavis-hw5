@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    var margin = {top: 20, right: 30, bottom: 30, left: 60},
-      width = 800 - margin.left - margin.right,
-      height = 600 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 30, bottom: 100, left: 60},
+      width = 600 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
 
     var svg_airportDivert = d3.select("#airportDivert")
     .append("svg")
@@ -173,7 +173,7 @@ $(document).ready(function(){
                         .enter().append("g")
                         .attr("class","lineLegend")
                         .attr("transform", function (d,i) {
-                          return "translate(" +width*0.9 + "," + (i*20)+")";
+                          return "translate(" +width*(i*0.25) + "," + 450+")";
                         });
 
     lineLegend.append("text").text(function (d) {return d;})

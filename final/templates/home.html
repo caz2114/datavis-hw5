@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/slider.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/button.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/radio.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/background_image.css') }}">
 
 	<!-- js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -25,13 +26,15 @@
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
 
 	<!-- visualization -->
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/map.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/flights.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/seats.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/airportDivert.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/supply_demand_chart.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/passengers.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'js/profit_chart.js') }}"></script>
-
+	<script>
+	</script>
 
 	<style>
 		body, html {
@@ -39,57 +42,6 @@
 			margin: 0;
 			font-family: 'Montserrat', sans-serif;
 			color: #777;
-		}
-
-		.title_image, .happen_title, .happen_conclusion, .changes_title, .closer_title{
-			position: relative;
-			background-attachment: fixed;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-
-		.title_image {
-			background-image: url("{{ url_for('static', filename='img/title.png') }}");
-			min-height: 100%;
-		}
-
-		.happen_title {
-			background-image: url("{{ url_for('static', filename='img/flight_path.png') }}");
-			min-height: 100%;
-		}
-
-		.happen_conclusion {
-			background-image: url("{{ url_for('static', filename='img/911_conclusion.png') }}");
-			min-height: 100%;
-		}
-
-		.changes_title {
-			background-image: url("{{ url_for('static', filename='img/security.png') }}");
-			min-height: 100%;
-		}
-
-		.closer_title {
-			background-image: url("{{ url_for('static', filename='img/closer_look.png') }}");
-			min-height: 100%;
-		}
-
-
-		.caption {
-			position: absolute;
-			left: 0;
-			top: 37%;
-			width: 100%;
-			color: #000;
-			text-align: center;
-		}
-
-		.caption span.border {
-			background-color: #111;
-			color: #fff;
-			padding: 20px;
-			font-size: 25px;
-			letter-spacing: 10px;
 		}
 
 		.title_text{
@@ -158,7 +110,6 @@
 			color: #e3e3e3;
 			padding-top: 100px;
 			padding-bottom: 100px;
-			height:100%
 		}
 
 		.closer_bg {
@@ -191,7 +142,68 @@
 			width: 37%;
 			padding-left: 5%;
 			padding-top: 5%;
+			top: -30em;
+			position: relative;
+		}
+
+		.scroll__figure2 {
+			position: -webkit-sticky;
 			position: sticky;
+			right: 100%;
+			top: 5em;
+			padding-left: 2%;
+			bottom: auto;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			z-index: 100;
+		}
+
+		.scroll__text2 {
+			padding-top: 5%;
+			padding-left: 40em;
+			top: -30em;
+			position: relative;
+		}
+
+		.scroll__figure3 {
+			position: -webkit-sticky;
+			position: sticky;
+			right: 100%;
+			top: 5em;
+			padding-left: 2%;
+			bottom: auto;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			z-index: 100;
+		}
+
+		.scroll__text3 {
+			padding-top: 5%;
+			padding-left: 55em;
+			padding-right: 5em;
+			padding-bottom: 25%;
+			top: -30em;
+			position: relative;
+		}
+
+		.scroll__figure4 {
+			position: -webkit-sticky;
+			position: sticky;
+			right: 100%;
+			top: 10em;
+			padding-left: 40em;
+			bottom: auto;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			z-index: 100;
+		}
+
+		.scroll__text4 {
+			width: 37%;
+			padding-left: 5%;
+			padding-top: 5%;
+			top: -30em;
+			position: relative;
 		}
 
 		.step {
@@ -205,13 +217,31 @@
 			opacity: 1;
 		}
 
+		.timeline_left{
+			border-right-style: solid;
+		}
+
+		.changes_intro_loc {
+			position: absolute;
+			left: 0;
+			top: 17%;
+		}
+
+		.changes_intro_text {
+			text-align: center;
+			background-color:#fff;
+			opacity:0.6;
+			color:#000;
+			padding: 2%;
+		}
+
+
 
 	</style>
 </head>
 
 <body>
 	<div class="title_image" id="top">
-	<!-- <div class="title_image" id="top"> -->
 		<div class="caption">
 			<div class="title_text">
 				<div class="title_header" style="letter-spacing: 10px;">
@@ -225,6 +255,7 @@
 		</div>
 	</div>
 
+	<!-- Quick links -->
 	<div class="container-fluid h-50">
 		<div class="row h-100">
 			<div class="col-md-4 d-flex justify-content-center align-items-center subsection_card black_bg" id="section1">
@@ -239,7 +270,6 @@
 		</div>
 	</div>
 
-
 	<div class="happen_title" id="section1_start">
 		<div class="caption">
 			<span class="border">What Happened on 911?</span>
@@ -248,7 +278,6 @@
 
 	<div class="happen_bg">
 		<div class="scroll__figure">
-			<script type="text/javascript" src="{{ url_for('static', filename = 'js/map.js') }}"></script>
 			<div id="map" >
 				<div class="row" >
 					<div class="col-md-12">
@@ -279,39 +308,54 @@
 		</div>
 	</div>
 
-	<div class="happen_bg2 d-flex align-items-center">
-		<div class="row">
-			<div class="col-md-8 d-flex align-items-center justify-content-center">
-				<div id="flights"></div>
-			</div>
+	<div class="happen_bg2">
+		<div class="scroll__figure3">
+			<div id="flights"></div>
+		</div>
 
-			<div class="col-md-4" style="padding-right:100px">
-				<div class='step'>
-					<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
-					<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
-				</div>
+		<div class="scroll__text3">
+			<div class='step'>
+				<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
+				<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
 			</div>
 		</div>
 	</div>
-
-	<div class="happen_conclusion">
-		<div class="caption">
-			CONCLUSION
-		</div>
 	</div>
 
 
-	<div class="changes_title" id="section2_start">
+	<div class="changes_title">
 		<div class="caption">
 			<span class="border">Changes in Supply and Demand</span>
 		</div>
 	</div>
 
+	<div class="changes_intro">
+		<div class="row changes_intro_loc d-flex align-self-center justify-content-center" >
+			<div class="col-md-6 changes_intro_text">
+				The airlines’ demand were negatively impacted due to the air passengers’
+				loss of confidence as well as increased frustration towards stricter
+				security measures. After the 911 terrorist attacks, the federal government
+				took over commercial airport security through a newly created agency, the
+				Transportation Security Administration. The resulting gantlet of airport
+				screening measures has made flying more time-consuming and burdensome,
+				requiring millions of travelers to shed their shoes and coats at crowded
+				security checkpoints, and to march through high-tech scanners that peer
+				through their clothes. <br /><br />
+				In addition, the consumer experience went down as air carrier companies
+				want to stop their losses of profits by increasing fee for luggages,
+				cutting expenses such as food or employees. It took 3 years for customers
+				to slowly return to airlines after the 911 attacks.
+			</div>
+		</div>
+	</div>
+
 	<div class="happen_bg">
 		<!-- Airport Diversion -->
-		<div id="airportDivert"></div>
+		<div class='scroll__figure2'>
+			<div id="airportDivert"></div>
+		</div>
 
-		<div class='scroll__text'>
+		<div class='scroll__text2'>
 			<div class='step'>
 				<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
 				<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
@@ -325,16 +369,30 @@
 
 	<div class="happen_bg2">
 		<!-- Supply and demand chart -->
-		<div id="sd_chart">
-			<form id="scale_btn">
-				<input type="radio" name="scale" value="Month" checked="checked">
-				<LABEL>Month</LABEL>
-				<input type="radio" name="scale" value="Quarter">
-				<LABEL>Quarter</LABEL>
-				<input type="radio" name="scale" value="Year">
-				<LABEL>Year</LABEL>
-			</form>
+		<div class='scroll__figure4'>
+			<div id="sd_chart">
+				<form id="scale_btn">
+					<input type="radio" name="scale" value="Month" checked="checked">
+					<LABEL>Month</LABEL>
+					<input type="radio" name="scale" value="Quarter">
+					<LABEL>Quarter</LABEL>
+					<input type="radio" name="scale" value="Year">
+					<LABEL>Year</LABEL>
+				</form>
+			</div>
 		</div>
+
+		<div class='scroll__text4'>
+			<div class='step'>
+				<h3>The first court-ordered desegregation of schools followed after the Brown decision in 1955.</h3>
+				<p>Most court-ordered desegregation of schools, ~ 85 %, following the decision were in Southern states like Arkansas, Alabama, and Mississippi. Following the era of Jim Crow, there was intense resistance to desegregation of schools. The most infamous instance of resistance occurred at Little Rock Central High School where the “Little Rock Nine” were prevented from entering the previously all-white high school by the Arkansas National Guard who had been deployed by order of the Arkansas State Governor. The standoff was only resolved after President Eisenhower’s direct intervention.</p>
+			</div>
+			<div class='step'>
+				<h3>By the 1960’s we saw an increase of more than 1700% in the number of school districts with a court order.</h3>
+				<p>The 1960’s was the height of the civil rights movement, which was marked by a surge in grassroots activism in all sectors of African-American life including education. In 1968 the Supreme Court ordered every state to desegregate their school systems. In order to comply with the law, under the mandate of Brown, the schools were judged on desegregation using 5 factors: facilities, staff, faculty, extracurricular activities, and transportation. To this day, these factors are still used to evaluate whether a school can legally be considered desegregated.</p>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="closer_title" id="section3_start">
@@ -361,8 +419,7 @@
 			</div>
 	</div>
 	<div class="closer_bg">
-		<div class="row">
-			<!-- <div class="col-md-6 d-flex align-items-center justify-content-center" > -->
+		<div class='scroll__figure3'>
 			<div class="col-md-6 d-flex align-items-center flex-column" >
 				<div class="row d-flex align-items-center justify-content-center">
 					<div id="passengers"></div>
@@ -372,34 +429,32 @@
 					<div id="seats"></div>
 				</div>
 			</div>
-			<div class="col-md-6" >
-				<div class="row">
-					<div class='step' >
-						<!-- TODO: select only AA -->
-						<h3>Growth in AA's supply and demand not expected.</h3>
-						<p>After 911 attack,all airline companies had their number of
-							passengers and seats decreased to varying degrees except AA.
-							Actually AA made a great jump in the number of both passengers
-							and seats, which seems strange considering that AA was
-							directly involved in 911. We later took a look at AA's
-							revenue report around 2001 and found the possible reason.</p>
-					</div>
+		</div>
 
-					<div class='step' >
-						<h3>US Airways disproportionately affected</h3>
-						<p>US Airways experienced a severe and long-lasting decrease
-							in number of both passengers and seats. after 911 attack.
-							As the largest carrier at Washington National Airport, US
-							Airways was disproportionately affected by that airport's
-							extended closure following the September 11 terrorist
-							attacks. The resulting financial disaster precipitated
-							the closure of the airline's MetroJet network, which
-							led to the de-hubbing of the subsidiary's primary operating
-							base at Baltimore-Washington International Airport and
-							the furloughing of thousands of employees.</p>
-					</div>
+		<div class='scroll__text3'>
+			<div class='step'>
+				<!-- TODO: select only AA -->
+				<h3>Growth in AA's supply and demand not expected.</h3>
+				<p>After 911 attack,all airline companies had their number of
+					passengers and seats decreased to varying degrees except AA.
+					Actually AA made a great jump in the number of both passengers
+					and seats, which seems strange considering that AA was
+					directly involved in 911. We later took a look at AA's
+					revenue report around 2001 and found the possible reason.</p>
+			</div>
 
-				</div>
+			<div class='step'>
+				<h3>US Airways disproportionately affected</h3>
+				<p>US Airways experienced a severe and long-lasting decrease
+					in number of both passengers and seats. after 911 attack.
+					As the largest carrier at Washington National Airport, US
+					Airways was disproportionately affected by that airport's
+					extended closure following the September 11 terrorist
+					attacks. The resulting financial disaster precipitated
+					the closure of the airline's MetroJet network, which
+					led to the de-hubbing of the subsidiary's primary operating
+					base at Baltimore-Washington International Airport and
+					the furloughing of thousands of employees.</p>
 			</div>
 		</div>
 	</div>
@@ -412,6 +467,35 @@
 					<button class="company_btn" name="company" id="AA">AA</button>
 					<button class="company_btn" name="company" id="UA">UA</button>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="padding-top:5%; padding-bottom:5%">
+		<div class="col-md-2"></div>
+		<!-- left side -->
+		<div class="col-md-4 timeline_left" style="text-align:right">
+			<div class="col-md-12">
+				<h3>2001 - </h3>
+				<p>911 occured, causing mass cancellation for the following days</p>
+			</div>
+			<div class="col-md-12" style="padding-top:10%">
+				<h3>2005 - </h3>
+				<p>Oil price soared, fuel cost increased from 13% to 40% of total expenses today</p>
+			</div>
+			<div class="col-md-12" style="padding-top:10%">
+				<h3>2010 - </h3>
+				<p>Most of the large carriers rebounded. Delta Air Lines, Northwest Airlines, United Airlines and US Airway filed for bankruptcy protection.</p>
+			</div>
+		</div>
+		<div class="col-md-4 timeline_right" >
+			<div class="col-md-12" style="padding-top:15%">
+				<h3> - 2003</h3>
+				<p>SARS virus, hurt international demand</p>
+			</div>
+			<div class="col-md-12" style="padding-top:15%">
+				<h3> - 2008</h3>
+				<p>Economic recession struck</p>
 			</div>
 		</div>
 	</div>
